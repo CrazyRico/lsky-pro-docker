@@ -2,9 +2,11 @@ FROM php:8.1-apache
 RUN a2enmod rewrite
 # 安装相关拓展
 RUN apt update && apt install imagemagick libmagickwand-dev -y \
+    && apt-get install libpq-dev -y \
     && pecl install imagick \
     && docker-php-ext-install bcmath \
     && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-enable imagick 
 RUN { \
     echo 'post_max_size = 100M;';\
